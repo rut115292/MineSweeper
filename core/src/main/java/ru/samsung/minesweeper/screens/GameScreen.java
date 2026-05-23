@@ -3,6 +3,7 @@ package ru.samsung.minesweeper.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,6 +30,7 @@ public class GameScreen implements Screen {
     private Texture flagTexture;
     private BitmapFont font;
     private TextButton backButton;
+    Music music;
 
     private float cellSize;
     private float boardWidth;
@@ -75,6 +77,8 @@ public class GameScreen implements Screen {
         mineTexture = new Texture("mina_blown.png");
         flagTexture = new Texture("red_flag.png");
 
+        music = Gdx.audio.newMusic(Gdx.files.internal("muzon.mp3"));
+
         // Загрузка шрифта
         font = new BitmapFont(Gdx.files.internal("crystal50yellow.fnt"),
             Gdx.files.internal("crystal50yellow.png"), false);
@@ -88,6 +92,8 @@ public class GameScreen implements Screen {
                 timer.stop();
                 game.setScreen(new MenuScreen(game));
             });
+        music.play();
+        music.setLooping(true);
     }
 
     private void calculateBoardSize() {
